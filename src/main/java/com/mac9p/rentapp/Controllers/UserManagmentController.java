@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/management/users")
+public class UserManagmentController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserManagmentController(UserService userService) {
         this.userService = userService;
 
         userService.addUser(new User(new ArrayList<>(),"Jan","Kowalski"));
         userService.addUser(new User(new ArrayList<>(),"Marzena","Kwasniewska"));
+
     }
 
     @GetMapping("/all")
@@ -33,12 +34,12 @@ public class UserController {
         return userService.findUserByLastName(lastName);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public void deleteUserById(@RequestParam Long id){
         userService.deleteUserById(id);
     }

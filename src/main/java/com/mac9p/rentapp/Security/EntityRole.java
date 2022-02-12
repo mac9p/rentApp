@@ -8,7 +8,9 @@ import static com.mac9p.rentapp.Security.EntityPermission.*;
 
 public enum EntityRole {
     USER(Sets.newHashSet(USER_READ,USER_WRITE)),
-    ADMIN(Sets.newHashSet(DISC_READ,DISC_WRITE,USER_READ,USER_WRITE));
+    ADMIN(Sets.newHashSet(DISC_READ,DISC_WRITE,USER_READ,USER_WRITE)),
+    ADMIN_TRAINEE(Sets.newHashSet(DISC_READ,USER_READ));
+
 
     private final Set<EntityPermission> permissions;
 
