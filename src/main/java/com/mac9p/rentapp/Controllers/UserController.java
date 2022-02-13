@@ -2,6 +2,7 @@ package com.mac9p.rentapp.Controllers;
 
 import com.mac9p.rentapp.Model.User;
 import com.mac9p.rentapp.Services.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ADMINTRAINEE')")
     public List<User> getAllUsers(){
         return userService.findAllUsers();
     }
@@ -34,11 +36,13 @@ public class UserController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('user:write')")
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAuthority('user:write')")
     public void deleteUserById(@RequestParam Long id){
         userService.deleteUserById(id);
     }

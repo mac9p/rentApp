@@ -1,6 +1,9 @@
 package com.mac9p.rentapp.Security;
 
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Set;
 
 public enum EntityPermission {
     USER_READ("user:read"),
@@ -14,4 +17,5 @@ public enum EntityPermission {
     EntityPermission(String permission) {
         this.permission = permission;
     }
+
 }

@@ -5,6 +5,7 @@ import com.mac9p.rentapp.Security.EntityRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -52,20 +54,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails janKowalskiUser = User.builder()
                 .username("jankowalski")
                 .password(passwordEncoder.encode("123"))
-                .roles(EntityRole.USER.name())
+                //.roles(EntityRole.USER.name())
+                .authorities(EntityRole.USER.getGrantedAuthorities())
                 .build();
 
 
         UserDetails karolinaUser = User.builder()
                 .username("karolina")
                 .password(passwordEncoder.encode("123"))
-                .roles(EntityRole.ADMIN.name())
+                //.roles(EntityRole.ADMIN.name())
+                .authorities(EntityRole.ADMIN.getGrantedAuthorities())
                 .build();
 
         UserDetails tomaszUser = User.builder()
                 .username("tomasz")
                 .password(passwordEncoder.encode("123"))
-                .roles(EntityRole.ADMIN_TRAINEE.name())
+                .authorities(EntityRole.ADMIN_TRAINEE.getGrantedAuthorities())
+                //.roles(EntityRole.ADMIN_TRAINEE.name())
                 .build();
 
         return new InMemoryUserDetailsManager(
