@@ -31,24 +31,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","index","/css/*","/js/*").permitAll()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/users/*").hasRole(EntityRole.USER.name())
                 /*.antMatchers("/management/**").hasRole(EntityRole.ADMIN.name())
                 .antMatchers("/management/**").hasRole(EntityRole.ADMIN_TRAINEE.name())
                 */
-                .antMatchers(HttpMethod.DELETE,"/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
-                .antMatchers(HttpMethod.POST,"/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
-                .antMatchers(HttpMethod.PUT,"/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
-                .antMatchers(HttpMethod.GET,"/**").hasAnyRole(EntityRole.ADMIN.name(),EntityRole.ADMIN_TRAINEE.name())
+                .antMatchers(HttpMethod.DELETE, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
+                .antMatchers(HttpMethod.POST, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
+                .antMatchers(HttpMethod.PUT, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
+                .antMatchers(HttpMethod.GET, "/**").hasAnyRole(EntityRole.ADMIN.name(), EntityRole.ADMIN_TRAINEE.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin();
+                //.loginPage("/login").permitAll();
     }
-
     @Override
     @Bean
-    protected UserDetailsService userDetailsService(){
+    protected UserDetailsService userDetailsService() {
 
 
         UserDetails janKowalskiUser = User.builder()
