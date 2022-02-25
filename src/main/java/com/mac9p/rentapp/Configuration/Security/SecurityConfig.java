@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -33,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/users/*").hasRole(EntityRole.USER.name())
-                /*.antMatchers("/management/**").hasRole(EntityRole.ADMIN.name())
-                .antMatchers("/management/**").hasRole(EntityRole.ADMIN_TRAINEE.name())
-                */
+                    /*.antMatchers("/management/**").hasRole(EntityRole.ADMIN.name())
+                    .antMatchers("/management/**").hasRole(EntityRole.ADMIN_TRAINEE.name())
+                    */
                 .antMatchers(HttpMethod.DELETE, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
                 .antMatchers(HttpMethod.POST, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
                 .antMatchers(HttpMethod.PUT, "/discs/**").hasAuthority(EntityPermission.DISC_WRITE.name())
@@ -43,8 +45,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
-                //.loginPage("/login").permitAll();
+                .formLogin()
+                    .loginPage("/login").permitAll()
+                    .defaultSuccessUrl("/discs/all")
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30))
+                    .key("placeholder")
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID","remember-me")
+                    .logoutSuccessUrl("/index");
     }
     @Override
     @Bean
