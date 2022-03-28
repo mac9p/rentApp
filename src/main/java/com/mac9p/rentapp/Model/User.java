@@ -20,7 +20,7 @@ public class User {
     private String lastName;
 
     public User(List<Disc> discsRented, String firstName, String lastName) {
-        DiscsRented = discsRented;
+        this.DiscsRented = discsRented;
         this.firstName = firstName;
         this.lastName = lastName;
     }

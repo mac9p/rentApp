@@ -10,7 +10,7 @@ public enum GenreOfMovie {
     HISTORICAL("HISTORICAL"),DOCUMENT("DOCUMENT"),
     HORROR("HORROR"),THRILLER("THRILLER");
 
-    GenreOfMovie(String adventure) {
+    GenreOfMovie(String genre) {
 
     }
 }

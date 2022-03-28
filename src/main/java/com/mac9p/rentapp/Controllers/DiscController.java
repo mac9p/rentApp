@@ -20,17 +20,20 @@ public class DiscController {
 
         discService.addDisc(new Disc("Pirates",50, LocalDate.of(2004,
                 11,
-                24), GenreOfMovie.ACTION));
+                24), GenreOfMovie.ACTION,
+                "Example desc"));
 
         discService.addDisc(new Disc("HorrorMovie",
                 20,
                 LocalDate.of(1999,4,30),
-                GenreOfMovie.HORROR));
+                GenreOfMovie.HORROR,
+                "Example desc"));
 
         discService.addDisc(new Disc("MightyAdventure",
                 70,
                 LocalDate.of(2012,5,6),
-                GenreOfMovie.ADVENTURE));
+                GenreOfMovie.ADVENTURE,
+                "Example desc"));
     }
 
 
