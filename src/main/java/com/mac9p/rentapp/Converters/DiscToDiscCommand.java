@@ -13,9 +13,11 @@ public class DiscToDiscCommand implements Converter<Disc, DiscCommand> {
         discCommand.setId(source.getId());
         discCommand.setTitle(source.getTitle());
         discCommand.setGenre(source.getGenre());
+        discCommand.setPrice(source.getPrice());
         discCommand.setYearOfPremiere(source.getYearOfPremiere());
         discCommand.setLent(source.isLent());
         discCommand.setDescription(source.getDescription());
+        discCommand.setUserRenting(source.getUserRenting());
         return discCommand;
     }
 }

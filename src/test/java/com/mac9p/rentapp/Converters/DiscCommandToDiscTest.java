@@ -48,6 +48,9 @@ class DiscCommandToDiscTest {
         assertEquals(disc.getTitle(),command.getTitle());
         assertEquals(disc.getGenre(),command.getGenre());
         assertEquals(disc.getYearOfPremiere(),command.getYearOfPremiere());
+        assertEquals(disc.isLent(),command.isLent());
+        assertEquals(disc.getDescription(),command.getDescription());
+        assertEquals(disc.getUserRenting(),command.getUserRenting());
 
     }
 

@@ -16,6 +16,7 @@ public class DiscCommandToDisc implements Converter<DiscCommand, Disc> {
         disc.setYearOfPremiere(source.getYearOfPremiere());
         disc.setLent(source.isLent());
         disc.setDescription(source.getDescription());
+        disc.setUserRenting(source.getUserRenting());
         return disc;
     }
 }

@@ -48,8 +48,8 @@ public class DiscController {
     }
 
     @GetMapping("/genre")
-    public Disc getDiscByGenre(@RequestParam GenreOfMovie genre){
-        return discService.getDiscByGenre(genre);
+    public List<Disc> getDiscByGenre(@RequestParam GenreOfMovie genre){
+        return discService.getDiscsByGenre(genre);
     }
 
     @PostMapping

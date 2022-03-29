@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class DiscCommand {
     private Long id;
     private String title;
+    private Integer price;
     private GenreOfMovie genre;
     private LocalDate yearOfPremiere;
     private boolean isLent;
