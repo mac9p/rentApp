@@ -1,17 +1,20 @@
 package com.mac9p.rentapp.Controllers;
 
 
+import com.mac9p.rentapp.Commands.DiscCommand;
 import com.mac9p.rentapp.Model.Disc;
 import com.mac9p.rentapp.Model.GenreOfMovie;
 import com.mac9p.rentapp.Services.DiscService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/discs")
 public class DiscController {
     private final DiscService discService;
@@ -52,10 +55,10 @@ public class DiscController {
         return discService.getDiscsByGenre(genre);
     }
 
-    @PostMapping
+    /*@PostMapping
     public Disc addDisc(@RequestBody Disc disc){
         return discService.addDisc(disc);
-    }
+    }*/
 
     @PutMapping
     public Disc updateDisc(@RequestBody Disc disc){
@@ -70,4 +73,18 @@ public class DiscController {
     public Disc findDiscByTitle(@RequestParam String title){
         return discService.findDiscByTitle(title);
     }
+
+    @RequestMapping("/new")
+    public String newDisc(Model model){
+        model.addAttribute("disc",new DiscCommand());
+
+        return "disc/discform";
+
+    }
+    @PostMapping()
+    public String saveOrUpdateDisc(@ModelAttribute DiscCommand command){
+        DiscCommand savedCommand = discService.saveDiscCommand(command);
+        return "redirect:/id?id="+savedCommand.getId();
+    }
+
 }

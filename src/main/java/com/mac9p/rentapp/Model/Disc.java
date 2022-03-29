@@ -1,6 +1,7 @@
 package com.mac9p.rentapp.Model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class Disc {
 
     @Enumerated(value = EnumType.STRING)
     private GenreOfMovie genre;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearOfPremiere;
 
     public Disc(String title, Integer price, LocalDate yearOfPremiere, GenreOfMovie genre,String description) {
