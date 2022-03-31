@@ -84,7 +84,7 @@ public class DiscController {
     @PostMapping()
     public String saveOrUpdateDisc(@ModelAttribute DiscCommand command){
         DiscCommand savedCommand = discService.saveDiscCommand(command);
-        return "redirect:/id?id="+savedCommand.getId();
+        return "redirect:/discs/id?id="+savedCommand.getId();
     }
 
 }
